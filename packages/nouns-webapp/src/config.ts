@@ -149,7 +149,7 @@ const config = {
   app: app[CHAIN_ID],
   addresses: getAddresses(),
   featureToggles: {
-    proposeOnV1: true,
+    proposeOnV1: false,
     candidates: true,
     fork: true,
   }
