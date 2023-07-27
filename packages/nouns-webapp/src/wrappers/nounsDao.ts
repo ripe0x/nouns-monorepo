@@ -1,4 +1,4 @@
-import { NounsDAOExecutorV2ABI, NounsDAOV3ABI, NounsDaoLogicV3Factory, NounsDaoExecutorV2Factory } from '@nouns/sdk';
+import { NounsDAOExecutorV2ABI, NounsDAOV2ABI, NounsDAOV3ABI, NounsDaoLogicV3Factory, NounsDaoExecutorV2Factory, NounsDaoLogicV2Factory } from '@nouns/sdk';
 import {
   ChainId,
   useBlockNumber,
@@ -256,7 +256,9 @@ export interface ForkSubgraphEntity {
 }
 
 const abi = new utils.Interface(NounsDAOV3ABI);
+const abiV2 = new utils.Interface(NounsDAOV2ABI);
 const executorAbi = new utils.Interface(NounsDAOExecutorV2ABI);
+const nounsDaoContractv2 = new NounsDaoLogicV2Factory().attach(config.addresses.nounsDAOProxy);
 const nounsDaoContract = NounsDaoLogicV3Factory.connect(config.addresses.nounsDAOProxy, undefined!);
 const nounsDaoExecutorContract = NounsDaoExecutorV2Factory.connect(config.addresses.nounsDaoExecutor, undefined!);
 
@@ -1227,10 +1229,19 @@ export const checkHasActiveOrPendingProposalOrCandidate = (
 };
 
 export const useIsDaoGteV3 = (): boolean => {
-  if (config.featureToggles.daoGteV3) {
+  const [implementation] = useContractCall({
+    abiV2,
+    address: config.addresses.nounsDAOProxy,
+    method: 'implementation',
+  }) || [];
+
+  if (implementation && config.addresses.nounsDAOLogicV2 && implementation.toLowerCase() !== config.addresses.nounsDAOLogicV2.toLowerCase()) {
     return true;
   }
-  return false
+  if (!config.featureToggles.daoGteV3) {
+    return false;
+  }
+  return true;
 }
 
 export const useTimelockV1Contract = (): string | undefined => {
