@@ -70,9 +70,9 @@ const getUpdatableCountdownCopy = (
   const endDate =
     proposal && timestamp && currentBlock
       ? dayjs(timestamp).add(
-          AVERAGE_BLOCK_TIME_IN_SECS * (proposal.updatePeriodEndBlock - currentBlock),
-          'seconds',
-        )
+        AVERAGE_BLOCK_TIME_IN_SECS * (proposal.updatePeriodEndBlock - currentBlock),
+        'seconds',
+      )
       : undefined;
 
   return (
@@ -133,9 +133,9 @@ const VotePage = ({
   const startDate =
     proposal && timestamp && currentBlock
       ? dayjs(timestamp).add(
-          AVERAGE_BLOCK_TIME_IN_SECS * (proposal.startBlock - currentBlock),
-          'seconds',
-        )
+        AVERAGE_BLOCK_TIME_IN_SECS * (proposal.startBlock - currentBlock),
+        'seconds',
+      )
       : undefined;
 
   const endBlock =
@@ -156,10 +156,9 @@ const VotePage = ({
   const againstPercentage = proposal && totalVotes ? (proposal.againstCount * 100) / totalVotes : 0;
   const abstainPercentage = proposal && totalVotes ? (proposal.abstainCount * 100) / totalVotes : 0;
 
-  // If v3, get user votes as of start block, otherwise get user votes as of created block
-  const userVotes = useUserVotesAsOfBlock(
-    isDaoGteV3 ? proposal?.startBlock : proposal?.createdBlock,
-  );
+  // Use user votes as of proposal snapshot block pulled from subgraph
+  const userVotes = useUserVotesAsOfBlock(proposal?.voteSnapshotBlock);
+
   // Get user votes as of current block to use in vote signals
   const userVotesNow = useUserVotes() || 0;
   const currentQuorum = useCurrentQuorum(
@@ -187,6 +186,7 @@ const VotePage = ({
   const hasManyVersions = proposalVersions && proposalVersions.length > 1;
   const isProposer = () => proposal?.proposer?.toLowerCase() === account?.toLowerCase();
   const isUpdateable = () => {
+    if (!isDaoGteV3) return false;
     if (
       proposal &&
       currentBlock &&
@@ -255,9 +255,9 @@ const VotePage = ({
     const time =
       proposal && timestamp && currentBlock
         ? dayjs(timestamp).add(
-            AVERAGE_BLOCK_TIME_IN_SECS * (proposal.objectionPeriodEndBlock! - currentBlock),
-            'seconds',
-          )
+          AVERAGE_BLOCK_TIME_IN_SECS * (proposal.objectionPeriodEndBlock! - currentBlock),
+          'seconds',
+        )
         : undefined;
     return time;
   };
@@ -403,7 +403,7 @@ const VotePage = ({
 
   const voterIds = voters?.votes?.map(v => v.voter.id);
   const { data: delegateSnapshot } = useQuery<Delegates>(
-    delegateNounsAtBlockQuery(voterIds ?? [], proposal?.createdBlock ?? 0),
+    delegateNounsAtBlockQuery(voterIds ?? [], proposal?.voteSnapshotBlock ?? 0),
     {
       skip: !voters?.votes?.length,
     },
@@ -752,14 +752,9 @@ const VotePage = ({
                     <h1>Snapshot</h1>
                   </div>
                   <div className={classes.snapshotBlock}>
-                    <span>
-                      {isDaoGteV3 ? (
-                        <Trans>Taken on start block</Trans>
-                      ) : (
-                        <Trans>Taken on created block</Trans>
-                      )}
-                    </span>
-                    <h3>{isDaoGteV3 ? proposal.startBlock : proposal.createdBlock}</h3>
+                    <h3>
+                      {proposal?.voteSnapshotBlock}
+                    </h3>
                   </div>
                 </div>
               </Card.Body>

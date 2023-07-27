@@ -328,7 +328,6 @@ const CandidateSponsors: React.FC<CandidateSponsorsProps> = props => {
                   <ul className={classes.sponsorsList}>
                     {signatures &&
                       signatures.map(signature => {
-                        console.log('delegateSnapshot', delegateSnapshot);
                         const sigVoteCount = delegateSnapshot.data?.delegates?.find(
                           delegate => delegate.id === signature.signer.id,
                         )?.nounsRepresented.length;

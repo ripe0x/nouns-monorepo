@@ -78,8 +78,6 @@ export default function SelectSponsorsToPropose(props: Props) {
     );
   };
 
-  console.log('selectedSignatures order', selectedSignatures);
-
   const handleProposeStateChange = useCallback((state: TransactionStatus) => {
     switch (state.status) {
       case 'None':
@@ -168,8 +166,8 @@ export default function SelectSponsorsToPropose(props: Props) {
                 onClick={() => {
                   selectedSignatures.includes(signature)
                     ? setSelectedSignatures(
-                        selectedSignatures.filter(sig => sig.signer !== signature.signer),
-                      )
+                      selectedSignatures.filter(sig => sig.signer !== signature.signer),
+                    )
                     : setSelectedSignatures([...selectedSignatures, signature]);
                 }}
                 disabled={

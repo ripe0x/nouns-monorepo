@@ -70,8 +70,6 @@ const CandidateHistoryPage = ({
     return <h1 className={classes.titleDiffs}>{str}</h1>;
   };
 
-  console.log('proposal.data', proposal.data);
-
   return (
     <Section fullWidth={false} className={classes.votePage}>
       <Col lg={12} className={classes.wrapper}>

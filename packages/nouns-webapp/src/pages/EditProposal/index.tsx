@@ -321,8 +321,6 @@ const EditProposalPage: React.FC<EditProposalProps> = props => {
   };
 
   const handleUpdateProposal = async () => {
-    console.log('handleUpdateProposal');
-    console.log('proposalTransactions', proposalTransactions);
     if (!proposalTransactions?.length) return;
     if (proposal === undefined) return;
 
@@ -450,15 +448,6 @@ const EditProposalPage: React.FC<EditProposalProps> = props => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [createProposalCandidateState, setModal]);
-
-  console.log(
-    'is edited?',
-    isProposalEdited,
-    isTitleEdited,
-    isBodyEdited,
-    isTransactionsEdited(),
-    isDescriptionEdited(),
-  );
 
   if (!isProposer()) {
     return null;

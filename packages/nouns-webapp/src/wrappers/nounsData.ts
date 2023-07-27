@@ -160,7 +160,6 @@ export const useGetUpdateCandidateCost = () => {
     args: [],
   });
 
-  console.log('updateCandidateCost', updateCandidateCost);
   if (!updateCandidateCost) {
     return;
   }
