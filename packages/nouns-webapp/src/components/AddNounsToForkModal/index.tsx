@@ -149,8 +149,7 @@ export default function AddNounsToForkModal(props: Props) {
           break;
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    },
-    [],
+    }, [],
   );
 
   const handleAddToForkStateChange = useCallback((state: TransactionStatus) => {
@@ -384,7 +383,7 @@ export default function AddNounsToForkModal(props: Props) {
               classes.button,
               classes.primaryButton,
               (isWaiting || isApprovalWaiting || isLoading || isApprovalLoading) &&
-                classes.loadingButton,
+              classes.loadingButton,
             )}
             disabled={
               selectedNouns.length === 0 ||
