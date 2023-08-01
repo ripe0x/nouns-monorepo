@@ -1315,7 +1315,7 @@ export const useIsDaoGteV3 = (): boolean => {
   if (!config.featureToggles.daoGteV3) {
     return false;
   }
-  return true;
+  return false;
 };
 
 export const useLastMinuteWindowInBlocks = (): number | undefined => {
