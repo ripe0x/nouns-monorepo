@@ -102,9 +102,6 @@ export const partialProposalsQuery = (first = 1_000) => gql`
     executionETA
     startBlock
     endBlock
-    updatePeriodEndBlock
-    objectionPeriodEndBlock
-    onTimelockV1
     signers {
       id
     }
