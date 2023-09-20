@@ -5,10 +5,10 @@ import {
   ProposalState,
   ProposalVersion,
   useCancelProposal,
-  useCurrentQuorum,
+  // useCurrentQuorum,
   useExecuteProposal,
   useExecuteProposalOnTimelockV1,
-  useHasVotedOnProposal,
+  // useHasVotedOnProposal,
   useIsDaoGteV3,
   useProposal,
   useProposalVersions,
@@ -38,17 +38,17 @@ import {
   delegateNounsAtBlockQuery,
   ProposalVotes,
   Delegates,
-  propUsingDynamicQuorum,
+  // propUsingDynamicQuorum,
 } from '../../wrappers/subgraph';
 import { getNounVotes } from '../../utils/getNounsVotes';
 import { Trans } from '@lingui/macro';
 import { i18n } from '@lingui/core';
 import { ReactNode } from 'react-markdown/lib/react-markdown';
 import { AVERAGE_BLOCK_TIME_IN_SECS } from '../../utils/constants';
-import { SearchIcon } from '@heroicons/react/solid';
-import ReactTooltip from 'react-tooltip';
-import DynamicQuorumInfoModal from '../../components/DynamicQuorumInfoModal';
-import config from '../../config';
+// import { SearchIcon } from '@heroicons/react/solid';
+// import ReactTooltip from 'react-tooltip';
+// import DynamicQuorumInfoModal from '../../components/DynamicQuorumInfoModal';
+// import config from '../../config';
 import ShortAddress from '../../components/ShortAddress';
 import StreamWithdrawModal from '../../components/StreamWithdrawModal';
 import { parseStreamCreationCallData } from '../../utils/streamingPaymentUtils/streamingPaymentUtils';
@@ -91,7 +91,7 @@ const VotePage = ({
   },
 }: RouteComponentProps<{ id: string }>) => {
   const [showVoteModal, setShowVoteModal] = useState<boolean>(false);
-  const [showDynamicQuorumInfoModal, setShowDynamicQuorumInfoModal] = useState<boolean>(false);
+  // const [showDynamicQuorumInfoModal, setShowDynamicQuorumInfoModal] = useState<boolean>(false);
   // Toggle between Noun centric view and delegate view
   const [isDelegateView, setIsDelegateView] = useState(false);
   const [isQueuePending, setQueuePending] = useState<boolean>(false);
@@ -116,11 +116,11 @@ const VotePage = ({
   const dispatch = useAppDispatch();
   const setModal = useCallback((modal: AlertModal) => dispatch(setAlertModal(modal)), [dispatch]);
   const { account } = useEthers();
-  const {
-    data: dqInfo,
-    loading: loadingDQInfo,
-    error: dqError,
-  } = useQuery(propUsingDynamicQuorum(id ?? '0'));
+  // const {
+  //   data: dqInfo,
+  //   loading: loadingDQInfo,
+  //   error: dqError,
+  // } = useQuery(propUsingDynamicQuorum(id ?? '0'));
   const { queueProposal, queueProposalState } = useQueueProposal();
   const { executeProposal, executeProposalState } = useExecuteProposal();
   const { executeProposalOnTimelockV1, executeProposalOnTimelockV1State } =
@@ -128,7 +128,7 @@ const VotePage = ({
   const { cancelProposal, cancelProposalState } = useCancelProposal();
   const isDaoGteV3 = useIsDaoGteV3();
   const proposalFeedback = useProposalFeedback(id, dataFetchPollInterval);
-  const hasVoted = useHasVotedOnProposal(proposal?.id);
+  // const hasVoted = useHasVotedOnProposal(proposal?.id);
   const forkActiveState = useIsForkActive();
   const [isForkActive, setIsForkActive] = useState<boolean>(false);
   // Get and format date from data
@@ -165,11 +165,11 @@ const VotePage = ({
 
   // Get user votes as of current block to use in vote signals
   const userVotesNow = useUserVotes() || 0;
-  const currentQuorum = useCurrentQuorum(
-    config.addresses.nounsDAOProxy,
-    proposal && proposal.id ? parseInt(proposal.id) : 0,
-    dqInfo && dqInfo.proposal ? dqInfo.proposal.quorumCoefficient === '0' : true,
-  );
+  // const currentQuorum = useCurrentQuorum(
+  //   config.addresses.nounsDAOProxy,
+  //   proposal && proposal.id ? parseInt(proposal.id) : 0,
+  //   dqInfo && dqInfo.proposal ? dqInfo.proposal.quorumCoefficient === '0' : true,
+  // );
 
   const getVersionTimestamp = (proposalVersions: ProposalVersion[]) => {
     const versionDetails = proposalVersions[proposalVersions.length - 1];
@@ -405,7 +405,7 @@ const VotePage = ({
   const activeAccount = useAppSelector(state => state.account.activeAccount);
   const {
     loading,
-    error,
+    // error,
     data: voters,
   } = useQuery<ProposalVotes>(proposalVotesQuery(proposal?.id ?? '0'), {
     skip: !proposal,

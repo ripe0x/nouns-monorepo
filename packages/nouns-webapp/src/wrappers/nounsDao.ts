@@ -1,5 +1,5 @@
 import {
-  NounsDAOV2ABI,
+  // NounsDAOV2ABI,
   NounsDAOV3ABI,
   NounsDaoLogicV3Factory,
 } from '@nouns/sdk';
@@ -264,7 +264,7 @@ export interface ForkSubgraphEntity {
 }
 
 const abi = new utils.Interface(NounsDAOV3ABI);
-const abiV2 = new utils.Interface(NounsDAOV2ABI);
+// const abiV2 = new utils.Interface(NounsDAOV2ABI);
 const nounsDaoContract = NounsDaoLogicV3Factory.connect(config.addresses.nounsDAOProxy, undefined!);
 
 // Start the log search at the mainnet deployment block to speed up log queries

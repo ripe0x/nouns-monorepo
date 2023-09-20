@@ -1,12 +1,12 @@
 import React from 'react';
-import { Alert, Col, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import ReactMarkdown from 'react-markdown';
 import { processProposalDescriptionText } from '../../utils/processProposalDescriptionText';
 import { ProposalDetail } from '../../wrappers/nounsDao';
 import remarkBreaks from 'remark-breaks';
 import {
   buildEtherscanAddressLink,
-  buildEtherscanHoldingsLink,
+  // buildEtherscanHoldingsLink,
   buildEtherscanTxLink,
 } from '../../utils/etherscan';
 import { utils } from 'ethers';
@@ -16,7 +16,7 @@ import EnsOrLongAddress from '../EnsOrLongAddress';
 import clsx from 'clsx';
 import ProposalTransactions from './ProposalTransactions';
 import linkIcon from '../../assets/icons/Link.svg';
-import config from '../../config';
+// import config from '../../config';
 
 interface ProposalContentProps {
   description: string;
@@ -54,9 +54,9 @@ export const transactionIconLink = (content: string) => {
 
 const ProposalContent: React.FC<ProposalContentProps> = props => {
   const { description, title, details } = props;
-  const daoEtherscanLink = buildEtherscanHoldingsLink(
-    config.addresses.nounsDaoExecutor ?? '', // This should always point at the V1 executor
-  );
+  // const daoEtherscanLink = buildEtherscanHoldingsLink(
+  //   config.addresses.nounsDaoExecutor ?? '', // This should always point at the V1 executor
+  // );
 
   return (
     <>
