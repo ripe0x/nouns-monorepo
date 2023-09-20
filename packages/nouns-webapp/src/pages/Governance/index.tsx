@@ -46,7 +46,7 @@ const GovernancePage = () => {
               <Trans>Governance</Trans>
             </span>
             <h1>
-              <Trans>Nouns DAO</Trans>
+              <Trans>Nouns DAO Fork #0</Trans>
             </h1>
           </Row>
           <p className={classes.subheading}>{subHeading}</p>
