@@ -255,30 +255,30 @@ const VotePage = ({
     }
     return endDate;
   };
-  const objectionEnd = () => {
-    const time =
-      proposal && timestamp && currentBlock
-        ? dayjs(timestamp).add(
-          AVERAGE_BLOCK_TIME_IN_SECS * (proposal.objectionPeriodEndBlock! - currentBlock),
-          'seconds',
-        )
-        : undefined;
-    return time;
-  };
+  // const objectionEnd = () => {
+  //   const time =
+  //     proposal && timestamp && currentBlock
+  //       ? dayjs(timestamp).add(
+  //         AVERAGE_BLOCK_TIME_IN_SECS * (proposal.objectionPeriodEndBlock! - currentBlock),
+  //         'seconds',
+  //       )
+  //       : undefined;
+  //   return time;
+  // };
 
-  const objectionEndTime = i18n.date(new Date(objectionEnd()?.toISOString() || 0), {
-    hour: 'numeric',
-    minute: '2-digit',
-    timeZoneName: 'short',
-  });
-  const objectionEndDate = i18n.date(new Date(objectionEnd()?.toISOString() || 0), {
-    dateStyle: 'long',
-  });
-  const objectionNoteCopy = (
-    <>
-      Voters will have until {objectionEndTime} on {objectionEndDate} to vote against this proposal.
-    </>
-  );
+  // const objectionEndTime = i18n.date(new Date(objectionEnd()?.toISOString() || 0), {
+  //   hour: 'numeric',
+  //   minute: '2-digit',
+  //   timeZoneName: 'short',
+  // });
+  // const objectionEndDate = i18n.date(new Date(objectionEnd()?.toISOString() || 0), {
+  //   dateStyle: 'long',
+  // });
+  // const objectionNoteCopy = (
+  //   <>
+  //     Voters will have until {objectionEndTime} on {objectionEndDate} to vote against this proposal.
+  //   </>
+  // );
   const moveStateButtonAction = hasSucceeded ? <Trans>Queue</Trans> : <Trans>Execute</Trans>;
   const moveStateAction = (() => {
     if (hasSucceeded) {
@@ -469,7 +469,7 @@ const VotePage = ({
     }
   }, [proposal?.status, isForkActive, setForkPeriodMessage, setIsExecutable]);
 
-  if (!proposal || loading || !data || loadingDQInfo || !dqInfo) {
+  if (!proposal || loading || !data) {
     return (
       <div className={classes.spinner}>
         <Spinner animation="border" />
@@ -477,24 +477,24 @@ const VotePage = ({
     );
   }
 
-  if (error || dqError) {
-    return <Trans>Failed to fetch</Trans>;
-  }
+  // if (error || dqError) {
+  //   return <Trans>Failed to fetch</Trans>;
+  // }
   const forNouns = getNounVotes(data, 1);
   const againstNouns = getNounVotes(data, 0);
   const abstainNouns = getNounVotes(data, 2);
-  const isV2Prop = dqInfo.proposal.quorumCoefficient > 0;
+  // const isV2Prop = dqInfo.proposal.quorumCoefficient > 0;
 
   return (
     <Section fullWidth={false} className={classes.votePage}>
-      {showDynamicQuorumInfoModal && (
+      {/* {showDynamicQuorumInfoModal && (
         <DynamicQuorumInfoModal
           proposal={proposal}
           againstVotesAbsolute={againstNouns.length}
           onDismiss={() => setShowDynamicQuorumInfoModal(false)}
           currentQuorum={currentQuorum}
         />
-      )}
+      )} */}
       <StreamWithdrawModal
         show={showStreamWithdrawModal}
         onDismiss={() => setShowStreamWithdrawModal(false)}
@@ -560,7 +560,7 @@ const VotePage = ({
             })}
         <Row className={clsx(classes.section, classes.transitionStateButtonSection)}>
           <Col className="d-grid gap-4">
-            {userVotes && !hasVoted && isObjectionPeriod ? (
+            {/* {userVotes && !hasVoted && isObjectionPeriod ? (
               <div className={classes.objectionWrapper}>
                 <div className={classes.objection}>
                   <div className={classes.objectionHeader}>
@@ -584,7 +584,7 @@ const VotePage = ({
                   </button>
                 </div>
               </div>
-            ) : null}
+            ) : null} */}
 
             {isActionable() && (
               <div className={classes.proposerOptionsWrapper}>
@@ -701,31 +701,6 @@ const VotePage = ({
                       <Trans>Threshold</Trans>
                     </h1>
                   </div>
-                  {isV2Prop && (
-                    <ReactTooltip
-                      id={'view-dq-info'}
-                      className={classes.delegateHover}
-                      getContent={dataTip => {
-                        return <Trans>View Threshold Info</Trans>;
-                      }}
-                    />
-                  )}
-                  <div
-                    data-for="view-dq-info"
-                    data-tip="View Dynamic Quorum Info"
-                    onClick={() => setShowDynamicQuorumInfoModal(true && isV2Prop)}
-                    className={clsx(classes.thresholdInfo, isV2Prop ? classes.cursorPointer : '')}
-                  >
-                    <span>
-                      {isV2Prop ? <Trans>Current Threshold</Trans> : <Trans>Threshold</Trans>}
-                    </span>
-                    <h3>
-                      <Trans>
-                        {isV2Prop ? i18n.number(currentQuorum ?? 0) : proposal.quorumVotes} votes
-                      </Trans>
-                      {isV2Prop && <SearchIcon className={classes.dqIcon} />}
-                    </h3>
-                  </div>
                 </div>
               </Card.Body>
             </Card>
@@ -754,16 +729,6 @@ const VotePage = ({
                     </h3>
                   </div>
                 </div>
-                {currentBlock && proposal?.objectionPeriodEndBlock > 0 && (
-                  <div className={classes.objectionPeriodActive}>
-                    <p>
-                      <strong>
-                        <Trans>Objection period triggered</Trans>
-                      </strong>
-                    </p>
-                    {currentBlock < proposal?.endBlock && <p>{objectionNoteCopy}</p>}
-                  </div>
-                )}
               </Card.Body>
             </Card>
           </Col>

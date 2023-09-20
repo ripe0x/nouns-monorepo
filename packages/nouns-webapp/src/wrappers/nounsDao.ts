@@ -752,7 +752,7 @@ export const useProposal = (id: string | number, toUpdate?: boolean): Proposal |
   const blockNumber = useBlockNumber();
   const timestamp = useBlockTimestamp(blockNumber);
   const isDaoGteV3 = useIsDaoGteV3();
-
+  console.log('prop data', useQuery(proposalQuery(id)).data?.proposal)
   return parseSubgraphProposal(
     useQuery(proposalQuery(id)).data?.proposal,
     blockNumber,

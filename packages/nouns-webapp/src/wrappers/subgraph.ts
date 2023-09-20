@@ -70,15 +70,13 @@ export const proposalQuery = (id: string | number) => gql`
     createdTimestamp
     startBlock
     endBlock
-    updatePeriodEndBlock
-    objectionPeriodEndBlock
+    
     executionETA
     targets
     values
     signatures
     calldatas
-    onTimelockV1
-    voteSnapshotBlock
+    
     proposer {
       id
     }
