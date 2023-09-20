@@ -80,7 +80,7 @@ const ProposalContent: React.FC<ProposalContentProps> = props => {
             <h5>
               <Trans>Proposed Transactions</Trans>
             </h5>
-            {props.proposeOnV1 && (
+            {/* {props.proposeOnV1 && (
               <Alert variant="warning" className="mb-4">
                 <Trans>
                   This proposal interacts with the{' '}
@@ -89,7 +89,7 @@ const ProposalContent: React.FC<ProposalContentProps> = props => {
                   </a>
                 </Trans>
               </Alert>
-            )}
+            )} */}
             <ProposalTransactions details={details} />
           </Col>
         </Row>

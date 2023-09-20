@@ -190,7 +190,7 @@ const NavBar = () => {
                 </Nav.Link>
               )}
             </div>
-            <Nav.Link
+            {/* <Nav.Link
               href={externalURL(ExternalURL.nounsCenter)}
               className={classes.nounsNavLink}
               target="_blank"
@@ -202,8 +202,8 @@ const NavBar = () => {
                 buttonIcon={<FontAwesomeIcon icon={faBookOpen} />}
                 buttonStyle={nonWalletButtonStyle}
               />
-            </Nav.Link>
-            <Nav.Link
+            </Nav.Link> */}
+            {/* <Nav.Link
               href={externalURL(ExternalURL.discourse)}
               className={classes.nounsNavLink}
               target="_blank"
@@ -215,21 +215,21 @@ const NavBar = () => {
                 buttonIcon={<FontAwesomeIcon icon={faComments} />}
                 buttonStyle={nonWalletButtonStyle}
               />
+            </Nav.Link> */}
+            {/* <div className={clsx(responsiveUiUtilsClasses.mobileOnly)}> */}
+            <Nav.Link
+              as={Link}
+              to="/playground"
+              className={classes.nounsNavLink}
+              onClick={closeNav}
+            >
+              <NavBarButton
+                buttonText={<Trans>Playground</Trans>}
+                buttonIcon={<FontAwesomeIcon icon={faPlay} />}
+                buttonStyle={nonWalletButtonStyle}
+              />
             </Nav.Link>
-            <div className={clsx(responsiveUiUtilsClasses.mobileOnly)}>
-              <Nav.Link
-                as={Link}
-                to="/playground"
-                className={classes.nounsNavLink}
-                onClick={closeNav}
-              >
-                <NavBarButton
-                  buttonText={<Trans>Playground</Trans>}
-                  buttonIcon={<FontAwesomeIcon icon={faPlay} />}
-                  buttonStyle={nonWalletButtonStyle}
-                />
-              </Nav.Link>
-              <Nav.Link
+            {/* <Nav.Link
                 as={Link}
                 to="/explore"
                 className={clsx(classes.nounsNavLink, classes.exploreButton)}
@@ -240,9 +240,9 @@ const NavBar = () => {
                   buttonIcon={<Noggles />}
                   buttonStyle={nonWalletButtonStyle}
                 />
-              </Nav.Link>
-            </div>
-            <div className={clsx(responsiveUiUtilsClasses.desktopOnly)}>
+              </Nav.Link> */}
+            {/* </div> */}
+            {/* <div className={clsx(responsiveUiUtilsClasses.desktopOnly)}>
               <NavDropdown
                 buttonText="Explore"
                 buttonIcon={<Noggles />}
@@ -275,7 +275,7 @@ const NavBar = () => {
                   Playground
                 </Dropdown.Item>
               </NavDropdown>
-            </div>
+            </div> */}
             <NavLocaleSwitcher buttonStyle={nonWalletButtonStyle} />
             <NavWallet address={activeAccount || '0'} buttonStyle={nonWalletButtonStyle} />{' '}
           </Navbar.Collapse>

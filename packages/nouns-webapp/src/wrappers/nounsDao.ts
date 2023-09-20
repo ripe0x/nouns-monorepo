@@ -1310,23 +1310,23 @@ export const checkHasActiveOrPendingProposalOrCandidate = (
 };
 
 export const useIsDaoGteV3 = (): boolean => {
-  const [implementation] =
-    useContractCall({
-      abi: abiV2,
-      address: config.addresses.nounsDAOProxy,
-      method: 'implementation',
-    }) || [];
-  if (
-    implementation &&
-    config.addresses.nounsDAOLogicV2 &&
-    implementation.toLowerCase() !== config.addresses.nounsDAOLogicV2.toLowerCase()
-  ) {
-    return true;
-  }
-  if (!config.featureToggles.daoGteV3) {
-    return false;
-  }
-  return true;
+  // const [implementation] =
+  //   useContractCall({
+  //     abi: abiV2,
+  //     address: config.addresses.nounsDAOProxy,
+  //     method: 'implementation',
+  //   }) || [];
+  // if (
+  //   implementation &&
+  //   config.addresses.nounsDAOLogicV2 &&
+  //   implementation.toLowerCase() !== config.addresses.nounsDAOLogicV2.toLowerCase()
+  // ) {
+  //   return true;
+  // }
+  // if (!config.featureToggles.daoGteV3) {
+  return false;
+  // }
+  // return true;
 };
 
 export const useLastMinuteWindowInBlocks = (): number | undefined => {
