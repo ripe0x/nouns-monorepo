@@ -17,6 +17,10 @@ const Footer = () => {
         <footer className={classes.footerSignature}>
           {/* <Link text={<Trans>Twitter</Trans>} url={twitterURL} leavesPage={true} /> */}
           <Link text={<Trans>Etherscan</Trans>} url={etherscanURL} leavesPage={true} />
+          <p style={{
+            display: 'block',
+            textAlign: 'center',
+          }}>Nouns Fork 0 front-end client provided by <Link text="BuilderDAO" url="https://nouns.build/" leavesPage={true} /></p>
           {/* <Link text={<Trans>Forums</Trans>} url={discourseURL} leavesPage={false} /> */}
         </footer>
       </Container>
