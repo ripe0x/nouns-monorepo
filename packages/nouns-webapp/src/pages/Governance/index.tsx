@@ -21,7 +21,7 @@ const GovernancePage = () => {
   const nounSingular = <Trans>Noun</Trans>;
   const nounPlural = <Trans>Nouns</Trans>;
   const subHeading = (
-    <Trans>
+    <>
       Nouns govern <span className={classes.boldText}>Nouns DAO</span>. Nouns can vote on proposals
       or delegate their vote to a third party. A minimum of{' '}
       <span className={classes.boldText}>
@@ -35,7 +35,7 @@ const GovernancePage = () => {
       </span>{' '}
       is required to submit proposals.
       The details of this fork can be found at <a href="https://nouns.wtf/fork/0">nouns.wtf/fork/0</a>.
-    </Trans>
+    </>
   );
 
   return (
@@ -60,7 +60,7 @@ const GovernancePage = () => {
                 </span>
               </Row>
               <Row>
-                <Col className={clsx(classes.ethTreasuryAmt)} lg={3}>
+                <Col className={clsx(classes.ethTrecdasuryAmt)} lg={3}>
                   <h1 className={classes.ethSymbol}>Ξ</h1>
                   <h1>
                     {treasuryBalance &&
