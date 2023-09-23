@@ -34,6 +34,7 @@ const GovernancePage = () => {
         )}
       </span>{' '}
       is required to submit proposals.
+      The details of this fork can be found at <a href="https://nouns.wtf/fork/0">nouns.wtf/fork/0</a>.
     </Trans>
   );
 
